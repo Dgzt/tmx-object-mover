@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'tmx-object-mover';
+
+  public upload(event: any): void {
+    console.log(event);
+  }
 }
