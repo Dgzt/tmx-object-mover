@@ -1,4 +1,14 @@
-<p-fileUpload
-  customUpload="true"
-  (uploadHandler)="upload($event)"
-></p-fileUpload>
+<div *ngIf="state === StateEnum.UPLOAD">
+  <p-fileUpload
+    customUpload="true"
+    (uploadHandler)="upload($event)"
+  ></p-fileUpload>
+</div>
+
+<div *ngIf="state === StateEnum.PARAMETERS">
+  TODO Parameters
+</div>
+
+<div *ngIf="state === StateEnum.DOWNLOAD">
+  TODO Download
+</div>
