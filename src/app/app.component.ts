@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StateEnum} from './enum/state.enum';
+import {Parser} from 'xml2js';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,8 @@ export class AppComponent implements OnInit{
 
   public state: StateEnum;
 
+  private map: any;
+
   ngOnInit(): void {
     this.state = StateEnum.UPLOAD;
   }
@@ -23,7 +26,15 @@ export class AppComponent implements OnInit{
     const fileReader = new FileReader();
     fileReader.onload = (e) => {
       console.log(fileReader.result);
-      this.state = StateEnum.PARAMETERS;
+      const parser = new Parser();
+      parser.parseString(fileReader.result, (error, result) => {
+        if (result) {
+          this.map = result;
+          this.state = StateEnum.PARAMETERS;
+        } else {
+          // TODO show error message
+        }
+      });
     };
 
     fileReader.readAsText(file);
