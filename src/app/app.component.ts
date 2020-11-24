@@ -6,9 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'tmx-object-mover';
 
   public upload(event: any): void {
-    console.log(event);
+    const file = event.files[0];
+    console.log(file);
+
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      console.log(fileReader.result);
+    };
+
+    fileReader.readAsText(file);
   }
 }
