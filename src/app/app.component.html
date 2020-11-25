@@ -1,16 +1,24 @@
 <div class="p-grid">
   <div class="p-col-8 p-offset-2">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>Upload</h1>
+      </div>
+      <div class="p-col-2 p-offset-5">
+        <p-fileUpload
+          mode="basic"
+          [auto]="true"
+          chooseLabel="Browse"
+          customUpload="true"
+          (uploadHandler)="upload($event)"
+        ></p-fileUpload>
+      </div>
 
-    <div *ngIf="state === StateEnum.UPLOAD">
-      <p-fileUpload
-        customUpload="true"
-        (uploadHandler)="upload($event)"
-      ></p-fileUpload>
-    </div>
-
-    <div *ngIf="state === StateEnum.PARAMETERS">
-      <form [formGroup]="form">
-        <div class="p-grid p-fluid">
+      <div *ngIf="map" class="p-col-12">
+        <form [formGroup]="form" class="p-grid p-fluid">
+          <div class="p-col-12">
+            <h1>Properties</h1>
+          </div>
           <div class="p-field p-col-6 p-offset-3">
             <label>Rate</label>
             <p-inputNumber
@@ -18,20 +26,15 @@
               [minFractionDigits]="3"
             ></p-inputNumber>
           </div>
-          <div class="p-col2 p-offset-5">
+          <div class="p-col-2 p-offset-5">
             <p-button
               (onClick)="onSubmit()"
               [disabled]="form.invalid"
               label="Submit"
             ></p-button>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-
-    <div *ngIf="state === StateEnum.DOWNLOAD">
-      TODO Download
-    </div>
-
   </div>
 </div>

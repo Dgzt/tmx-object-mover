@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Parser} from 'xml2js';
-import {StateEnum} from './enum/state.enum';
+import {FileUpload} from 'primeng/fileupload';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,9 @@ import {StateEnum} from './enum/state.enum';
 })
 export class AppComponent implements OnInit{
 
-  public StateEnum = StateEnum;
+  @ViewChild(FileUpload, {static: false}) fileUpload: FileUpload;
 
-  public state: StateEnum;
-
-  private map: any;
+  public map: any;
 
   public form: FormGroup;
 
@@ -22,8 +20,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.state = StateEnum.UPLOAD;
-
     this.form = this.createForm();
   }
 
@@ -38,7 +34,6 @@ export class AppComponent implements OnInit{
       parser.parseString(fileReader.result, (error, result) => {
         if (result) {
           this.map = result;
-          this.state = StateEnum.PARAMETERS;
         } else {
           // TODO show error message
         }
@@ -46,6 +41,7 @@ export class AppComponent implements OnInit{
     };
 
     fileReader.readAsText(file);
+    this.fileUpload.clear();
   }
 
   public onSubmit(): void {
