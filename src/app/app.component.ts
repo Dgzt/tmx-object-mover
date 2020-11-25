@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Parser} from 'xml2js';
 import {FileUpload} from 'primeng/fileupload';
+import {Parser, Builder} from 'xml2js';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-root',
@@ -56,10 +57,10 @@ export class AppComponent implements OnInit{
       });
     });
 
-    // const blob = new Blob([], { type: 'application/x-tiled-tmx'});
-    // const url = window.URL.createObjectURL(blob);
-    // window.open(url);
-    // TODO download
+    const builder = new Builder();
+    const xml = builder.buildObject(this.modifiedMap);
+    const blob = new Blob([xml], { type: 'application/x-tiled-tmx'});
+    saveAs(blob, 'map.tmx');
   }
 
   private createForm(): FormGroup {
