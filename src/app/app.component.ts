@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
   @ViewChild(FileUpload, {static: false}) fileUpload: FileUpload;
 
   public map: any;
+  public modifiedMap: any;
 
   public form: FormGroup;
 
@@ -25,15 +26,15 @@ export class AppComponent implements OnInit{
 
   public upload(event: any): void {
     const file = event.files[0];
-    console.log(file);
+    console.log(event);
 
     const fileReader = new FileReader();
     fileReader.onload = (e) => {
-      console.log(fileReader.result);
       const parser = new Parser();
       parser.parseString(fileReader.result, (error, result) => {
         if (result) {
           this.map = result;
+          console.log(this.map);
         } else {
           // TODO show error message
         }
@@ -45,7 +46,20 @@ export class AppComponent implements OnInit{
   }
 
   public onSubmit(): void {
-    console.log('todo');
+    const rate = this.form.value.rate;
+    this.modifiedMap = Object.assign(this.map);
+
+    this.modifiedMap.map.objectgroup.forEach(og => {
+      og.object.forEach(o => {
+        o.$.x *= rate;
+        o.$.y *= rate;
+      });
+    });
+
+    // const blob = new Blob([], { type: 'application/x-tiled-tmx'});
+    // const url = window.URL.createObjectURL(blob);
+    // window.open(url);
+    // TODO download
   }
 
   private createForm(): FormGroup {
