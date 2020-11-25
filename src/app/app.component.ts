@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {StateEnum} from './enum/state.enum';
+import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Parser} from 'xml2js';
+import {StateEnum} from './enum/state.enum';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,15 @@ export class AppComponent implements OnInit{
 
   private map: any;
 
+  public form: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
+  }
+
   ngOnInit(): void {
     this.state = StateEnum.UPLOAD;
+
+    this.form = this.createForm();
   }
 
   public upload(event: any): void {
@@ -38,5 +46,15 @@ export class AppComponent implements OnInit{
     };
 
     fileReader.readAsText(file);
+  }
+
+  public onSubmit(): void {
+    console.log('todo');
+  }
+
+  private createForm(): FormGroup {
+    return this.formBuilder.group({
+      rate: ['1.000', Validators.required]
+    });
   }
 }

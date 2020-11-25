@@ -9,16 +9,24 @@
     </div>
 
     <div *ngIf="state === StateEnum.PARAMETERS">
-      <div class="p-grid p-fluid">
-        <div class="p-field p-col-6 p-offset-3">
-          <label>Rate</label>
-          <p-inputNumber [minFractionDigits]="3">
-          </p-inputNumber>
+      <form [formGroup]="form">
+        <div class="p-grid p-fluid">
+          <div class="p-field p-col-6 p-offset-3">
+            <label>Rate</label>
+            <p-inputNumber
+              formControlName="rate"
+              [minFractionDigits]="3"
+            ></p-inputNumber>
+          </div>
+          <div class="p-col2 p-offset-5">
+            <p-button
+              (onClick)="onSubmit()"
+              [disabled]="form.invalid"
+              label="Submit"
+            ></p-button>
+          </div>
         </div>
-        <div class="p-col2 p-offset-5">
-          <p-button label="Submit"></p-button>
-        </div>
-      </div>
+      </form>
     </div>
 
     <div *ngIf="state === StateEnum.DOWNLOAD">
