@@ -9,12 +9,14 @@
     </div>
 
     <div *ngIf="state === StateEnum.PARAMETERS">
-      <div class="p-grid">
-        <div class="p-col-2">
-          Rate
+      <div class="p-grid p-fluid">
+        <div class="p-field p-col-6 p-offset-3">
+          <label>Rate</label>
+          <p-inputNumber [minFractionDigits]="3">
+          </p-inputNumber>
         </div>
-        <div class="p-col-10">
-          <input />
+        <div class="p-col2 p-offset-5">
+          <p-button label="Submit"></p-button>
         </div>
       </div>
     </div>
