@@ -1,14 +1,27 @@
-<div *ngIf="state === StateEnum.UPLOAD">
-  <p-fileUpload
-    customUpload="true"
-    (uploadHandler)="upload($event)"
-  ></p-fileUpload>
-</div>
+<div class="p-grid">
+  <div class="p-col-8 p-offset-2">
 
-<div *ngIf="state === StateEnum.PARAMETERS">
-  TODO Parameters
-</div>
+    <div *ngIf="state === StateEnum.UPLOAD">
+      <p-fileUpload
+        customUpload="true"
+        (uploadHandler)="upload($event)"
+      ></p-fileUpload>
+    </div>
 
-<div *ngIf="state === StateEnum.DOWNLOAD">
-  TODO Download
+    <div *ngIf="state === StateEnum.PARAMETERS">
+      <div class="p-grid">
+        <div class="p-col-2">
+          Rate
+        </div>
+        <div class="p-col-10">
+          <input />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="state === StateEnum.DOWNLOAD">
+      TODO Download
+    </div>
+
+  </div>
 </div>
