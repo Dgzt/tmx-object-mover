@@ -19,6 +19,14 @@
           <div class="p-col-12">
             <h1>Properties</h1>
           </div>
+          <div class="p-field-checkbox p-col-6 p-offset-3">
+            <p-checkbox
+              [formControlName]="'changeSize'"
+              binary="true"
+              inputId="changeSize"
+            ></p-checkbox>
+            <label for="changeSize">Change size</label>
+          </div>
           <div class="p-field p-col-6 p-offset-3">
             <label>Rate</label>
             <p-inputNumber

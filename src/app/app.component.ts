@@ -47,11 +47,17 @@ export class AppComponent implements OnInit{
   }
 
   public onSubmit(): void {
+    const changeSize = this.form.value.changeSize;
     const rate = this.form.value.rate;
     this.modifiedMap = Object.assign(this.map);
 
     this.modifiedMap.map.objectgroup.forEach(og => {
       og.object.forEach(o => {
+        if (changeSize) {
+          o.$.width *= rate;
+          o.$.height *= rate;
+        }
+
         o.$.x *= rate;
         o.$.y *= rate;
       });
@@ -65,6 +71,7 @@ export class AppComponent implements OnInit{
 
   private createForm(): FormGroup {
     return this.formBuilder.group({
+      changeSize: [true, Validators.required],
       rate: ['1.000', Validators.required]
     });
   }
